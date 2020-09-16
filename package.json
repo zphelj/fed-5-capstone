@@ -1,0 +1,49 @@
+{
+  "name": "fed-5-capstone",
+  "version": "1.0.0",
+  "description": "My FED Nanodegree Capstone Project",
+  "main": "client.js",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack-dev-server  --config webpack.dev.js",
+    "start": "node src/server/server.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zphelj/fed-5-capstone.git"
+  },
+  "keywords": [
+    "FED",
+    "nanodegree",
+    "capstone"
+  ],
+  "author": "Jay Phelps",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/zphelj/fed-5-capstone/issues"
+  },
+  "homepage": "https://github.com/zphelj/fed-5-capstone#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.3.0",
+    "html-webpack-plugin": "^4.4.1",
+    "mini-css-extract-plugin": "^0.11.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
