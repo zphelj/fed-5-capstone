@@ -6,16 +6,27 @@
   </head>
   <body>
   <header>
-    <div class="">
-    <img src="./images/Dog_01.jpg" alt="My Dog Logo" width="80" height="80">
+    <div class=search_bar>
+      <img src="./media/Dog_01.jpg" alt="My Dog Logo" width="150" height="150">
+      <input id="location_input" type="text" name="input_location" value="">
+      <input id="date_start" type="text" name="input_date_start" value="">
+      <input id="date_end" type="text" name="input_date_end" value="">
+      <input type="submit" name="" value="submit" onclick="return Client.locationChange(event)">
     </div>
-    <!-- <div class="">
-      navigation (stub - not needed for this one page sample)
-    </div> -->
   </header>
 
   <main>
-
+    <div>
+      <div id="pixabay_photo">
+        <img src="https://cdn.pixabay.com/photo/2015/07/11/23/02/plane-841441_960_720.jpg" alt="Pixabay Photo" width="500" height="500">
+      </div>
+      <img src="./media/pixabay_logo.svg" alt="Photo by Pixabay" width="75" height="75">
+    </div>
+    <section>
+      <div id=travel_details>
+        Travel Details Here
+      </div>
+    </section>
   </main>
     <footer>
       <div id="myFooter">Last request: N/A</div>

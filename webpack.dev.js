@@ -4,15 +4,16 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
+    mode: 'development',
     entry: './src/client/index.js',
     output: {
         path: path.join(__dirname, 'dist'),
+        filename: 'bundle.js',
         libraryTarget: 'var',
         library: 'Client'
     },
-    mode: 'development',
     devtool: 'source-map',
-    stats: 'verbose',
+    // stats: 'verbose',
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: false,
@@ -36,7 +37,7 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: '/media/',
+                    outputPath: 'media/',
                     publicPath: 'media/',
                     query: {
                       name: 'media/[name].[ext]',

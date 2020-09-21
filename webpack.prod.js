@@ -11,7 +11,6 @@ module.exports = {
     entry: './src/client/index.js',
     output: {
         path: path.join(__dirname, 'dist'),
-        //filename: 'bundle.min.js',
         libraryTarget: 'var',
         library: 'Client'
     },
@@ -34,10 +33,10 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: '/images/',
-                    publicPath: 'images/',
+                    outputPath: '/media/',
+                    publicPath: 'media/',
                     query: {
-                      name: 'images/[name].[ext]',
+                      name: 'media/[name].[ext]',
                     },
                 },
             }
