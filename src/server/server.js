@@ -1,85 +1,67 @@
-// we have several variables coming from the environment
+// Setup empty JS object to act as endpoint for all routes
+projectData = {};
+
+// we have variables coming from the environment
 const dotenv = require('dotenv');
 const result = dotenv.config()
 if (result.error) {
   throw result.error
-}
-// console.log(result.parsed)
+};
+
 // ENV loaded properly
-const geonames__userid = process.env.GEONAMES_USERID;
-const pixabay_api_key = process.env.PIXABAY_API_KEY;
-const weatherbit_api_key = process.env.WEATHERBIT_API_KEY;
 const serverport = process.env.TRAVEL_APP_SERVER_PORT;
 
 // brings window.fetch to node server side apps
-const fetch = require('node-fetch');
-
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
-
-// needed for webpack dev server use (different ports = CORS issues)
 const cors = require('cors');
 
-const app = express()
-
-app.use(express.static('dist'))
+const app = express();
+app.use(express.static('dist'));
 
 /* Middleware*/
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-console.log(__dirname)
+console.log('Dirname = ', __dirname)
 
 app.get('/', function (req, res) {
-res.sendFile('dist/index.html')
-// res.sendFile(path.resolve('src/client/views/index.html')) // - pre-webpack
-})
+  res.sendFile('dist/index.html')
+});
 
-/* take the provided URL and call out to the NLP provider for processing */
-app.get('/process_nlp_url', function (req, res) {
-  console.log('GET: NLP requested:');
-  console.log('URL = ', req.query.url);
-  let mcURL = `${MeaningCloudURLRoot}&url=${req.query.url}`
-  console.log('Querying Meaning Cloud with: ', mcURL);
-  fetch(mcURL)
-    .then(res => res.json())
-    .then(function(json) {
-      console.log("Status is ", json.status);
-      // res.send(JSON.stringify(json.status)); // send back a readable response
-      // build a summary + all response to the client
-      let summary = {
-        'status': json.status.msg,
-        'agreement': json.agreement,
-        'confidence': json.confidence,
-        'irony': json.irony
-      }
-      res.send(JSON.stringify(summary)); // send back a readable response
-    })
-    .catch(error => {
-      console.log('Error in process_nlp_url: ', error)
-      res.send(JSON.stringify(error)); // send back a readable response
-    })
+// Handle /trip route
+app.get('/trip', (req, res) => {
+  console.log('In-> handle route /trip'); // DEBUG
+  console.log('Sending: ', projectData);
+  res.send(JSON.stringify(projectData));
 });
 
 // for testing server access
 app.get('/hello', (req, res) => {
-  console.log('GET: Hello was requested');
-  res.send("Hello from the NLP process server...");
+  console.log('In-> handle route /hello'); // DEBUG
+  res.send("Hello from server.js ...");
 });
 
-/* app.get('/nlp_test', (req, res) => {
-  console.log('GET: URL Test was requested');
-  fetch(`${MeaningCloudURLRoot}&url=http://jayphelps.name`)
-    .then(res => res.json())
-    .then(function(json) {
-      // console.log('Result = ', json);
-      console.log("Status is ", json.status.msg);
-      res.send(JSON.stringify(json.status)); // send back a readable response
-    })
-}); */
+function addPostData(req,res) {
+  console.log('In-> addPostData()'); // DEBUG
+  //console.log('Adding: ', req,body);
+  projectData.location = req.body.location;
+  projectData.start_date = req.body.start_date;
+  projectData.end_date = req.body.end_date;
+  projectData.pixabay_url = req.body.pixabay_url;
+  projectData.weather = req.body.weather;
+  res.send(projectData);
+}
+
+// Handle POST '/add'
+app.post('/add', addPostData);
 
 // Startup the server instance
 app.listen(serverport,  () => {
   console.log(`Travel App Server listening on port ${serverport}!`);
 });
+
+module.exports = {
+  // ES5 export is best for now with server.js and NODE JEST testing
+}
