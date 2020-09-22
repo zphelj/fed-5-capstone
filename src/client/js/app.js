@@ -1,12 +1,25 @@
-import { fetchWeather } from "./travel_functions";
-
 const serverport = 5010;
 const serverURLroot = `http://localhost:${serverport}`;
 const pixabay_not_found_pic_default = 'https://cdn.pixabay.com/photo/2016/08/19/15/11/lost-1605501_960_720.jpg';
 const pixabay_default_pic = 'https://cdn.pixabay.com/photo/2015/07/11/23/02/plane-841441_960_720.jpg';
 
-let d = new Date();
-let currentDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let dateCurrent = new Date();
+let currentDate = (1+dateCurrent.getMonth())+'.'+ dateCurrent.getDate()+'.'+ dateCurrent.getFullYear(); // Javascript month is zero based (Doh!)
+
+// Handy functions from Stack Overflow questions on the topic of date conversion
+// s is format y-m-d
+// Returns a date object for 00:00:00 local time
+// on the specified date
+function parseDate(s) {
+  var b = s.split(/\D/);
+  return new Date(b[0], --b[1], b[2]);
+}
+
+// Convert a date to days (must be in same time zone, ignores daylight savings)
+function toDays(d) {
+  d = d || 0;
+  return d / 24 / 60 / 60 / 1000;
+ }
 
 /* Function to POST data to server */
 const postData = async (url='', data = {})=>{
@@ -81,7 +94,7 @@ export async function locationChange(event) {
   let location = document.getElementById('location_input').value;
   let start_date = document.getElementById('date_start_input').value;
   let end_date = document.getElementById('date_end_input').value;
-
+  console.log('Start date = ', start_date);
   let pixabay_url = ''; // placeholder
 
   // test inputs
@@ -106,12 +119,20 @@ export async function locationChange(event) {
     long = json.long;
   }
 
-  json = await Client.fetchWeather(lat, long);
+  let days = 1;
+  // check for 7+ days in future
+  let dateStart = parseDate(start_date);
+  if(toDays(dateStart) - toDays(dateCurrent) > 7) {
+    console.log('Start date is more than 7 days in the future');
+  }
+  json = await Client.fetchWeather(lat, long, days);
   // CHECK RESPONSE
   if (false) {
     // Not Found ?
   } else {
      weather.high_temp = json.high_temp;
+     weather.low_temp = json.low_temp;
+     weather.description = json.weather.description;
   }
 
   json = await Client.fetchPicture(location);

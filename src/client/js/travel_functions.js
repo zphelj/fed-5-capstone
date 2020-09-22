@@ -1,4 +1,4 @@
-//
+// Key's for API's
 const geonames__userid = 'zphelj';
 const WEATHERBIT_API_KEY='22e6157488974eb7920ef907799afef9';
 const PIXABAY_API_KEY='18324887-bfafd27bcc06a34251f07828a';
@@ -23,9 +23,9 @@ export async function fetchCords(location) {
 }
 
 // Uses the weatherbit API to obtain the weather for a set of cordinates
-export async function fetchWeather(lat, long) {
+export async function fetchWeather(lat, long, days) {
   console.log('In-> fetchWeather()'); // DEBUG
-  let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHERBIT_API_KEY}&lang=en&units=I&lat=${lat}&lon=${long}&days=1`;
+  let url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHERBIT_API_KEY}&lang=en&units=I&lat=${lat}&lon=${long}&days=${days}`;
   let pResponse = await fetch(url);
   if (!pResponse.ok) {
     throw new Error(`HTTP error fetching location weather! status: ${response.status}`);
