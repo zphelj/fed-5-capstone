@@ -6,41 +6,42 @@
   </head>
   <body>
   <header>
-    <div class=search_bar>
-      <img src="./media/Dog_01.jpg" alt="My Dog Logo" width="150" height="150"><br>
-      <label for="input_location">Location:</label>
-      <input id="location_input" type="text" name="input_location" value="">
-      <label for="input_date_start">Trip Start Date:</label>
-      <input id="date_start_input" type="date" name="input_date_start" value="">
-      <label for="input_date_end">Trip End Date:</label>
-      <input id="date_end_input" type="date" name="input_date_end" value=""><br>
-      <input id="change_location_button" type="submit" name="" value="Change Location">
-      <input id="clear_location_button" type="button" name="" value="Clear Trip">
-    </div>
+    <img src="./media/Dog_01.jpg" alt="My Dog Logo" width="50" height="50"><br>
+    <h1>Simple Trip Planner for Udacity Nano Degree Capstone</h1>
   </header>
 
   <main>
     <div>
+      <div class=search_bar>
+        <label for="input_location">Location:</label>
+        <input id="location_input" type="text" name="input_location" value="">
+        <label for="input_date_start">Trip Start Date:</label>
+        <input id="date_start_input" type="date" name="input_date_start" value="">
+        <label for="input_date_end">Trip End Date:</label>
+        <input id="date_end_input" type="date" name="input_date_end" value=""><br>
+        <input id="change_location_button" type="submit" name="" value="Change Location">
+        <input id="clear_location_button" type="button" name="" value="Clear Trip">
+      </div>
       <div id="pixabay_photo">
         <img src="https://cdn.pixabay.com/photo/2015/07/11/23/02/plane-841441_960_720.jpg" alt="Pixabay Photo" width="500" height="500">
       </div>
       <img src="./media/pixabay_logo.svg" alt="Photo by Pixabay" width="75" height="75">
     </div>
-    <section>
-      <div id=travel_details>Travel Details Here</div>
-    </section>
+    <div>
+      <div id=travel_details>Travel details appear once you create your trip</div>
+    </div>
   </main>
     <footer>
       <div id="myFooter"></div>
     </footer>
-    <!-- <script>
+    <script>
       // Check that service workers are supported
       if ('serviceWorker' in navigator) {
         // Use the window load event to keep the page load performant
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js');
         });
-      }
-       </script> -->
+      };
+    </script>
   </body>
 </html>

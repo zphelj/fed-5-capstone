@@ -1,5 +1,5 @@
 // Import so webpack knows it exists
-import { fetchCords, fetchWeather, fetchPicture } from './js/travel_functions';
+import { fetchCords, fetchWeather, fetchPicture, parseDate, toDays, forecastHTML } from './js/travel_functions';
 import { locationChange, updatePage, clearTrip } from './js/app';
 
 // (S)CSS
@@ -16,7 +16,10 @@ export {
   fetchPicture,
   locationChange,
   clearTrip,
-  updatePage
+  updatePage,
+  parseDate,
+  toDays,
+  forecastHTML
 };
 
 // Event listener to add function to existing HTML DOM element

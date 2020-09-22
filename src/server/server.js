@@ -1,5 +1,11 @@
-// Setup empty JS object to act as endpoint for all routes
-projectData = {};
+// Setup object to act as endpoint for all routes
+projectData = {
+  location: "",
+  start_date: "",
+  end_date: "",
+  pixabay_url: "",
+  weather: {}
+}
 
 // we have variables coming from the environment
 const dotenv = require('dotenv');

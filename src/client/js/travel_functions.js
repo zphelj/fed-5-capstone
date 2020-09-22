@@ -3,6 +3,30 @@ const geonames__userid = 'zphelj';
 const WEATHERBIT_API_KEY='22e6157488974eb7920ef907799afef9';
 const PIXABAY_API_KEY='18324887-bfafd27bcc06a34251f07828a';
 
+// Handy (with some tweaks I made) functions from Stack Overflow questions on the topic of date conversion
+// s is format y-m-d
+// Returns a date object for 00:00:00 local time
+// on the specified date
+export function parseDate(s) {
+  var b = s.split(/\D/);
+  return new Date(b[0], --b[1], b[2], 0);
+};
+
+// Convert a date to days (must be in same time zone, ignores daylight savings)
+export function toDays(d) {
+  d = d || 0;
+  return d / 24 / 60 / 60 / 1000;
+};
+
+// returns a forecast HTML block
+export function forecastHTML(data) {
+  let html = '<div class="forecast">';
+  html += `<h3>${data.datetime}</h3>`;
+  html += `High: ${data.high_temp}  Low: ${data.low_temp}<br>${data.weather.description}`;
+  html += '</div>';
+  return html;
+};
+
 // Uses the geonames API to get the cordinates matching a location string.
 //   May return multiple entries, we'll use the first
 export async function fetchCords(location) {
@@ -15,9 +39,9 @@ export async function fetchCords(location) {
     throw new Error(`HTTP error fetching location cordinates! status: ${response.status}`);
   } else {
     let json = await pResponse.json();
-    console.log('Results = ', json.totalResultsCount); // DEBUG
+    //console.log('Results = ', json.totalResultsCount); // DEBUG
     // use first match
-    console.log(`Lat: ${json.geonames[0].lat}  Long: ${json.geonames[0].lng}`);
+    //console.log(`Lat: ${json.geonames[0].lat}  Long: ${json.geonames[0].lng}`); // DEBUG
     return({'lat': json.geonames[0].lat, 'long': json.geonames[0].lng});
   }
 }
@@ -31,9 +55,9 @@ export async function fetchWeather(lat, long, days) {
     throw new Error(`HTTP error fetching location weather! status: ${response.status}`);
   } else {
     let json = await pResponse.json();
-    console.log(json.data[0]); // DEBUG
-    // use first match
-    return(json.data[0]);
+    //console.log(json.data[0]); // DEBUG
+    // return full weather array (up to 16 days)
+    return(json);
   }
 }
 
