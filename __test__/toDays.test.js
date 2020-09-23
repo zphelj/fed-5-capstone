@@ -1,4 +1,6 @@
-import { toDays } from '../src/client/js/travel_functions'
+// Test the toDays function
+
+import { toDays } from '../src/client/js/travel_functions';
 
 const date1 = new Date('2010-08-01');
 

@@ -1,5 +1,6 @@
-//const { app } = require('../src/client/js/app');
-const app = require('../src/server/server'); // Link to your server file
+// Tests against server.js using Supertest - tutorial here https://zellwk.com/blog/endpoint-testing/
+
+const app = require('../src/server/server'); // Link to my server file
 const supertest = require('supertest');
 const request = supertest(app);
 
@@ -13,7 +14,8 @@ test('Test server.js /Hello get route', async done => {
   done();
 });
 
-let projectData = {
+// setup expected default /trip results
+const projectData = {
   location: "",
   start_date: "",
   end_date: "",

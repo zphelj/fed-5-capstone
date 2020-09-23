@@ -1,4 +1,6 @@
-import { parseDate } from '../src/client/js/travel_functions'
+// Test the data function
+
+import { parseDate } from '../src/client/js/travel_functions';
 
 const date1 = new Date('2020-08-01');
 
