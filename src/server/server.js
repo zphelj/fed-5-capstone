@@ -1,5 +1,5 @@
 // Setup object to act as endpoint for all routes
-projectData = {
+let projectData = {
   location: "",
   start_date: "",
   end_date: "",
@@ -64,10 +64,8 @@ function addPostData(req,res) {
 app.post('/add', addPostData);
 
 // Startup the server instance
-app.listen(serverport,  () => {
+/* app.listen(serverport,  () => {
   console.log(`Travel App Server listening on port ${serverport}!`);
-});
+}); */
 
-module.exports = {
-  // ES5 export is best for now with server.js and NODE JEST testing
-}
+module.exports = app
