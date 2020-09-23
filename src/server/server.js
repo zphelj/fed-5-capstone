@@ -1,3 +1,5 @@
+// Back end express server for the FED-5 Capstone application
+
 // Setup object to act as endpoint for all routes
 let projectData = {
   location: "",
@@ -5,41 +7,30 @@ let projectData = {
   end_date: "",
   pixabay_url: "",
   weather: {}
-}
-
-// we have variables coming from the environment
-const dotenv = require('dotenv');
-const result = dotenv.config()
-if (result.error) {
-  throw result.error
 };
 
-// ENV loaded properly
-const serverport = process.env.TRAVEL_APP_SERVER_PORT;
-
-// brings window.fetch to node server side apps
+// Setup, globals
+const serverport = 5010;
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const app = express();
 app.use(express.static('dist'));
 
-/* Middleware*/
+// Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-console.log('Dirname = ', __dirname)
-
+// Basic / route handler
 app.get('/', function (req, res) {
   res.sendFile('dist/index.html')
 });
 
 // Handle /trip route
+// Returns the data stored on the server for the current trip
 app.get('/trip', (req, res) => {
   console.log('In-> handle route /trip'); // DEBUG
-  // console.log('Sending: ', projectData); // DEBUG
   res.send(JSON.stringify(projectData));
 });
 
@@ -49,6 +40,7 @@ app.get('/hello', (req, res) => {
   res.send("Hello from server.js ...");
 });
 
+// Function to handle a post of data from the client and store locally
 function addPostData(req,res) {
   console.log('In-> addPostData()'); // DEBUG
   //console.log('Adding: ', req,body);
@@ -58,9 +50,10 @@ function addPostData(req,res) {
   projectData.pixabay_url = req.body.pixabay_url;
   projectData.weather = req.body.weather;
   res.send(projectData);
-}
+};
 
 // Handle POST '/add'
 app.post('/add', addPostData);
 
-module.exports = app
+// Must export app for Supertest
+module.exports = app;
