@@ -12,3 +12,19 @@ test('Test server.js /Hello get route', async done => {
   expect(res.text).toEqual('Hello from server.js ...');
   done();
 });
+
+let projectData = {
+  location: "",
+  start_date: "",
+  end_date: "",
+  pixabay_url: "",
+  weather: {}
+}
+
+test('Test server.js /trip get route', async done => {
+  const res = await request.get('/trip');
+  expect(res.status).toBe(200);
+  let dataObj = JSON.parse(res.text);
+  expect(dataObj).toEqual(projectData);
+  done();
+});

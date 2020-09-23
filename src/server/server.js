@@ -63,9 +63,4 @@ function addPostData(req,res) {
 // Handle POST '/add'
 app.post('/add', addPostData);
 
-// Startup the server instance
-/* app.listen(serverport,  () => {
-  console.log(`Travel App Server listening on port ${serverport}!`);
-}); */
-
 module.exports = app
