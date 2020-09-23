@@ -55,16 +55,21 @@ export async function updatePage() {
   document.getElementById('date_start_input').value = start_date;
   document.getElementById('date_end_input').value = end_date;
 
+  let dateStart = Client.parseDate(start_date);
+  let daysToStart = Math.round(Client.toDays(dateStart) - Client.toDays(dateCurrent));
+
   // Update weather
   let weatherHTML = '<div class="weatherblock">';
   if (!(weather.data)) { // if no weather data ...
     weatherHTML = 'Travel details appear once you create your trip';
   } else if (weather.data.length == 1) {
     // current days forecast only
-    weatherHTML += `<h2>Today\'s Forecast for ${location}</h2>` + Client.forecastHTML(weather.data[0]);
+    weatherHTML += `<h2>Your trip departs in ${daysToStart} days</h2>` +
+      `<h2>Today\'s Forecast for ${location}</h2>` + Client.forecastHTML(weather.data[0]);
   } else {
     // array of forecasts by day starting from current day
-    weatherHTML += `<h2>${weather.data.length} Day Forecast for ${location}</h2>`;
+    weatherHTML += weatherHTML += `<h2>Your trip departs in ${daysToStart} days</h2>` +
+      `<h2>${weather.data.length} Day Forecast for ${location}</h2>`;
     weather.data.forEach(val => {
       weatherHTML += Client.forecastHTML(val);
     });

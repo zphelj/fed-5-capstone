@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
 // Handle /trip route
 app.get('/trip', (req, res) => {
   console.log('In-> handle route /trip'); // DEBUG
-  console.log('Sending: ', projectData);
+  // console.log('Sending: ', projectData); // DEBUG
   res.send(JSON.stringify(projectData));
 });
 
