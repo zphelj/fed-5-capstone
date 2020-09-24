@@ -47,8 +47,9 @@ Then open a browser to [http://localhost:5010](http://localhost:5010).
 To run in development mode with webpack's DevServer.
 ```
 Run `npm start` to launch a production server back end on port 5010.
-Run `npm run dev` to launch a DevServer which will automatically open a browser window to [http://localhost:5000](http://localhost:5000). This will connect back to the server instance on 5010.
+Run `npm run dev` to launch a DevServer.
 ```
+Launching DevSewrver will automatically open a browser window to [http://localhost:5000](http://localhost:5000). This will connect back to the server instance on 5010.
 
 The user of the web page must enter a location and a start date. The end date is optional; perhaps they don't want to come back from their trip!  If you fail to enter these an alert message will prompt for this information to proceed.
 
