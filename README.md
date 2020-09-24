@@ -49,8 +49,9 @@ To run in development mode with webpack's DevServer.
 Run `npm start` to launch a production server back end on port 5010.
 Run `npm run dev` to launch a DevServer.
 ```
-Launching DevSewrver will automatically open a browser window to [http://localhost:5000](http://localhost:5000). This will connect back to the server instance on 5010.
+Launching DevServer will automatically open a browser window to [http://localhost:5000](http://localhost:5000). This will connect back to the server instance on 5010.
 
+### End User (web site) usage
 The user of the web page must enter a location and a start date. The end date is optional; perhaps they don't want to come back from their trip!  If you fail to enter these an alert message will prompt for this information to proceed.
 
 Once this is entered the system will call Geonames to lookup the coordinates for the location provided, then call Weatherbit to obtain the appropriate weather forecast, the call Pixabay to find an appropriate travel themed picture for that location. The system will always display the number of days until the trip start and the current forecast for that location.
