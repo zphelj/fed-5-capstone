@@ -81,4 +81,4 @@ The application has mobile, tablet, and wide presentation and smooth transition 
 * The capstone rubric requires the API and user ID's for the dependent services to be encoded in the app.js. As such this is usable as-is with my existing keys as encoded in the file. Please follow the Dependencies links for each API and the instructions there to create your own keys and update `/src/client/js/travel_functions.js`.
 
 ## License
-This is in the public domain at this time and offered without warranty. It should not be used to cheat on your Udacity Nanodegree!
+This is in the public domain at this time and offered without warranty.
