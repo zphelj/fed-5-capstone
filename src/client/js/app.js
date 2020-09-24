@@ -24,7 +24,7 @@ export async function updatePage() {
   console.log('In-> updatePage()'); // DEBUG
   // request data from server
   let request = await fetch(`${serverURLroot}/trip`);
-  let allData = '';
+
   // set some defaults
   let pixabay_url = pixabay_default_pic;
   let location = '';
@@ -32,6 +32,7 @@ export async function updatePage() {
   let end_date = '';
   let weather = {};
 
+  let allData = '';
   try {
     allData = await request.json();
   }
@@ -49,35 +50,56 @@ export async function updatePage() {
   };
 
   // update Travel Info on Page
-  document.getElementById('pixabay_photo').innerHTML =
-    `<img src="${pixabay_url}" alt="${location}" width="500" height="500"></img>`;
-  document.getElementById('location_input').value = location;
-  document.getElementById('date_start_input').value = start_date;
-  document.getElementById('date_end_input').value = end_date;
+  document.getElementById('pixabay-photo').innerHTML =
+    `<img class="pixabay-photo" src="${pixabay_url}" alt="${location}"></img><img class="pixabay-logo" src="./media/pixabay_logo.svg" alt="Photo by Pixabay">`;
+  // populate input fields
+  document.getElementById('location-input').value = location;
+  document.getElementById('date-start-input').value = start_date;
+  document.getElementById('date-end-input').value = end_date;
 
+  // calculate days to start of trip
   let dateStart = Client.parseDate(start_date);
-  let daysToStart = Math.round(Client.toDays(dateStart) - Client.toDays(dateCurrent));
+  let daysToStart = Math.ceil(Client.toDays(dateStart) - Client.toDays(dateCurrent)); // .ceil = round up
+  let dateEnd = Client.parseDate(end_date);
+
+
+  // Update summary
+  let summaryHTML = '';
+  if (start_date == '') {
+    summaryHTML += 'Travel details will be available once you create your trip';
+  } else {
+    summaryHTML += `Your trip departs in ${daysToStart} days`;
+    if (!(isNaN(dateEnd.getMonth()))) { // END date specified
+      let daysToEnd = Math.ceil(Client.toDays(dateEnd) - Client.toDays(dateCurrent)); // .ceil = round up
+      summaryHTML += ` and will last ${daysToEnd - daysToStart + 1} days`;
+    }
+  };
+  document.getElementById('travel-summary').innerHTML = summaryHTML;
 
   // Update weather
-  let weatherHTML = '<div class="weatherblock">';
-  if (!(weather.data)) { // if no weather data ...
-    weatherHTML = 'Travel details appear once you create your trip';
+  let weatherHTML = '';
+  let weatherType = '';
+  if (start_date == '') {
+    weatherHTML = '<div>'; // no trip selected yet
+  } else if (!(weather.data)) { // if no weather data ...
+    weatherType = 'There is no forecast information available for your trip';
   } else if (weather.data.length == 1) {
     // current days forecast only
-    weatherHTML += `<h2>Your trip departs in ${daysToStart} days</h2>` +
-      `<h2>Today\'s Forecast for ${location}</h2>` + Client.forecastHTML(weather.data[0]);
+    weatherType += `<div>Today's Forecast for ${location} is</div>`;
+    weatherHTML += Client.forecastHTML(weather.data[0]);
   } else {
     // array of forecasts by day starting from current day
-    weatherHTML += weatherHTML += `<h2>Your trip departs in ${daysToStart} days</h2>` +
-      `<h2>${weather.data.length} Day Forecast for ${location}</h2>`;
+    weatherType += `<div>${weather.data.length} Day Forecast for ${location}</div>`;
     weather.data.forEach(val => {
       weatherHTML += Client.forecastHTML(val);
     });
   }
-  weatherHTML += '</div>';
-  document.getElementById('travel_details').innerHTML = weatherHTML;
+  weatherHTML += '</div>'; // closing DIV
+  document.getElementById('forecast-type').innerHTML = weatherType;
+  document.getElementById('forecast-details').innerHTML = weatherHTML;
+
   // update footer
-  document.getElementById('myFooter').innerHTML = 'Today is ' + currentDate;
+  document.getElementById('myfooter').innerHTML = '&#169; Jay Phelps ' + currentDate;
 };
 
 export async function clearTrip(event) {
@@ -98,9 +120,9 @@ export async function clearTrip(event) {
 export async function locationChange(event) {
   console.log('In-> locationChange()'); // DEBUG
   // get inputs from page
-  let location = document.getElementById('location_input').value;
-  let start_date = document.getElementById('date_start_input').value;
-  let end_date = document.getElementById('date_end_input').value;
+  let location = document.getElementById('location-input').value;
+  let start_date = document.getElementById('date-start-input').value;
+  let end_date = document.getElementById('date-end-input').value;
   let pixabay_url = ''; // placeholder
 
   // test inputs
@@ -111,7 +133,16 @@ export async function locationChange(event) {
   if (!(start_date)) {
     alert('You must specify a trip start date');
     return;
-  }
+  };
+  if (end_date) {
+    // check that end is not before start!
+    let sd = Client.toDays(Client.parseDate(start_date));
+    let ed = Client.toDays(Client.parseDate(end_date));
+    if (ed < sd) {
+      alert(`The end date can't be before you leave!`);
+      return;
+    };
+  };
 
   // Get Cordinates for Location
   let json = await Client.fetchCords(location);

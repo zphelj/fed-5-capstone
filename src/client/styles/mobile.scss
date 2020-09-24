@@ -1,0 +1,121 @@
+/* Mobile layout first */
+$font-stack:    Helvetica, sans-serif;
+
+body {
+  display:grid;
+  font: 100% $font-stack;
+  grid-template-columns: 100%;
+  background: #87cefa;
+  width: 100vw;
+  grid-template-columns: 90fw;
+  grid-template-areas:
+    "header"
+    "search-bar"
+    "travel-photo"
+    "travel-summary"
+    "forecast-details"
+    "footer";
+}
+
+h3 {
+  font-weight: bolder;
+}
+
+footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.travel-summary {
+  padding: 1rem;
+  margin: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.forecast-details {
+  padding: 1rem;
+  margin: 5px;
+}
+
+.forecast {
+  border: 3px solid rgb(98, 6, 184);
+  background: rgb(197, 224, 233);
+  color: red;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 5px;
+}
+
+.header {
+  grid-area: header;
+  display: flex;
+  flex-direction: row;
+  //align-content: center;
+  color: white;
+  text-align: center;
+  align-items: center;
+}
+
+.mylogo {
+  display: block;
+  margin: 10px;
+  border-radius: 10%;
+  height: 50px;
+  width: 50px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.travel-photo {
+  display: block;
+  justify-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pixabay-photo {
+  display: block;
+  padding: 5px;
+  width: 100%;
+}
+
+.pixabay-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10%;
+  height: 20px;
+  align-content: left;
+}
+
+.button {
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #f7f7f7;
+  border-radius: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+  background-color: #79BD9A;
+  color: white;
+}
+
+// a simple hover effect but I like it; easy to verify the button being chosen
+.button:hover {
+  transform: scale(1.2);
+}
+
+.input {
+  margin: 20px;
+  color: #a314dc;
+}

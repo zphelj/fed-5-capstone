@@ -2,7 +2,7 @@
   "name": "fed-5-capstone",
   "version": "1.0.0",
   "description": "My FED Nanodegree Capstone Project",
-  "main": "client.js",
+  "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server  --config webpack.dev.js",
@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "webpack": "^4.44.1",

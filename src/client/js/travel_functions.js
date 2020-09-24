@@ -20,11 +20,53 @@ export function toDays(d) {
   return d / 24 / 60 / 60 / 1000;
 };
 
+// Create a more pleasing display date for forecasts and other uses
+// Input is a string like '2020-10-30'
+// Returns a formatted string to display
+function dateToDisplay(sdate) {;
+  let d = new Date(sdate+'T00:00:00'); // without the T time dates may be off due to timezone
+  let day = '';
+  switch (d.getDay()) {
+    case 0:
+      day = 'Sunday';
+      break;
+    case 1:
+      day = 'Monday';
+      break;
+    case 2:
+      day = 'Tuesday';
+      break;
+    case 3:
+      day = 'Wednesday';
+      break;
+    case 4:
+      day = 'Thursday';
+      break;
+    case 5:
+      day = 'Friday';
+      break;
+    case 6:
+      day = 'Saturday';
+      break;
+    default:
+      // this should never happen
+      day = 'Unknown!';
+  }
+  let month = d.getMonth() + 1; // javascript is 0 month = January
+  let newdate = '';
+  if (month < 10) {
+    newdate = `${day}, 0${month}-${d.getFullYear()}`;
+  } else {
+    newdate = `${day}, ${month}-${d.getFullYear()}`;
+  }
+  return newdate;
+}
+
 // Generates and returns a Forecast HTML block of code
 export function forecastHTML(data) {
   let html = '<div class="forecast">';
-  html += `<h3>${data.datetime}</h3>`;
-  html += `High: ${data.high_temp}  Low: ${data.low_temp}<br>${data.weather.description}`;
+  html += `<h3>${dateToDisplay(data.datetime)}</h3>`;
+  html += `High: ${data.high_temp}  Low: ${data.low_temp}<br>Expect ${data.weather.description}`;
   html += '</div>';
   return html;
 };

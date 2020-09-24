@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-  <meta charset="utf-8">
-    <title>Jays Nano Travel App</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./media/favicon.ico">
+    <meta charset="utf-8">
+    <title>My Nanodegree Travel App</title>
   </head>
   <body>
-  <header>
-    <img src="./media/Dog_01.jpg" alt="My Dog Logo" width="50" height="50"><br>
-    <h1>Simple Trip Planner for Udacity Nano Degree Capstone</h1>
-  </header>
-
-  <main>
-    <div>
-      <div class=search_bar>
-        <label for="input_location">Location:</label>
-        <input id="location_input" type="text" name="input_location" value="">
-        <label for="input_date_start">Trip Start Date:</label>
-        <input id="date_start_input" type="date" name="input_date_start" value="">
-        <label for="input_date_end">Trip End Date:</label>
-        <input id="date_end_input" type="date" name="input_date_end" value=""><br>
-        <input id="change_location_button" type="submit" name="" value="Change Location">
-        <input id="clear_location_button" type="button" name="" value="Clear Trip">
+    <main>
+      <div class="header">
+        <img class="mylogo" src="./media/Dog_01.jpg" alt="My Dog Logo">
+        <div class="title">Trip Planner for Udacity Nano Degree Capstone</div>
       </div>
-      <div id="pixabay_photo">
-        <img src="https://cdn.pixabay.com/photo/2015/07/11/23/02/plane-841441_960_720.jpg" alt="Pixabay Photo" width="500" height="500">
+      <div class="search-bar">
+        <div class="input text">
+          <label for="input-location">Destination</label>
+          <input id="location-input" type="text" name="input-location" value="" placeholder="A location ..">
+        </div>
+        <div class="input date">
+          <label for="input-date-start">Trip Start Date</label>
+          <input id="date-start-input" type="date" name="input-date-start" value="">
+        </div>
+        <div class="input date">
+          <label for="input-date-end">Trip End Date</label>
+          <input id="date-end-input" type="date" name="input-date-end" value=""><br>
+        </div>
+        <input class="button" id="change-location-button" type="submit" name="" value="Change Location">
+        <input class="button" id="clear-location-button" type="button" name="" value="Clear Trip">
       </div>
-      <img src="./media/pixabay_logo.svg" alt="Photo by Pixabay" width="75" height="75">
-    </div>
-    <div>
-      <div id=travel_details>Travel details appear once you create your trip</div>
-    </div>
-  </main>
+      <div class="travel-photo" id="pixabay-photo"></div>
+      <div id="travel-summary" class="travel-summary"></div>
+      <div id="forecast-type" class="travel-summary"></div>
+      <div id="forecast-details" class="forecast-details"></div>
+    </main>
     <footer>
-      <div id="myFooter"></div>
+      <div id="myfooter"></div>
     </footer>
-    <script>
-      // Check that service workers are supported
-      if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/service-worker.js');
-        });
-      };
-    </script>
   </body>
+  <!-- Insert Service Worker Script here -->
 </html>

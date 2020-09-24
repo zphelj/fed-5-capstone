@@ -1,0 +1,23 @@
+/* Wider layout */
+@media(min-width:901px){
+  body{
+    background: linear-gradient(90deg, #a10721 0%, #55efcb 0%,#5bcbff 0%, #55efcb 100%);
+  }
+
+  .forecast-details{
+    grid-area: content;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+  }
+
+  .forecast {
+    border: 3px solid rgb(98, 6, 184);
+    background: rgb(197, 224, 233);
+    color: red;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 5px;
+    width: 300px;
+  }
+}
