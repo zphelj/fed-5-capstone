@@ -1,5 +1,6 @@
 const serverport = 5010;
-const serverURLroot = `http://localhost:${serverport}`;
+const serverURLroot = `https://fed-5.herokuapp.com/`; // for heroku
+// const serverURLroot = `http://localhost:${serverport}`;
 const pixabay_not_found_pic_default = 'https://cdn.pixabay.com/photo/2016/08/19/15/11/lost-1605501_960_720.jpg';
 const pixabay_default_pic = 'https://cdn.pixabay.com/photo/2015/07/11/23/02/plane-841441_960_720.jpg';
 
